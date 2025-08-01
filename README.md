@@ -11,7 +11,8 @@
 - `.gitignore` : ไฟล์สำหรับ ignore venv, ไฟล์ชั่วคราว, รูปภาพ ฯลฯ
 
 ### การสร้างโน้ตใหม่
-(psunote/images/note-function-create.png)
+![note-function-edit-note](/images/note-function-create.png)
+
 
 ### การแก้ไขโน้ต
 ![note-function-edit-note](/images/note-function-edit-note.png)
