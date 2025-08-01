@@ -11,19 +11,19 @@
 - `.gitignore` : ไฟล์สำหรับ ignore venv, ไฟล์ชั่วคราว, รูปภาพ ฯลฯ
 
 ### การสร้างโน้ตใหม่
-![note-function-create](psunote/images/note-function-create.png)
+(psunote/images/note-function-create.png)
 
 ### การแก้ไขโน้ต
-![note-function-edit-note](psunote/images/note-function-edit-note.png)
+![note-function-edit-note](/images/note-function-edit-note.png)
 
 ### การลบ/แก้ไขโน้ตจากรายการ
-![note-function-del-edit](psunote/images/note-function-del-edit.png)
+![note-function-del-edit](/images/note-function-del-edit.png)
 
 ### การสร้างแท็กใหม่
-![tag-function-2-create](psunote/images/tag-function-2-create.png)
+![tag-function-2-create](/images/tag-function-2-create.png)
 
 ### การแก้ไข/ลบแท็ก
-![tag-function-1-edit_and_del](psunote/images/tag-function-1-edit_and_del.png)
+![tag-function-1-edit_and_del](/images/tag-function-1-edit_and_del.png)
 
 ## วิธีติดตั้งและใช้งาน (Local)
 
