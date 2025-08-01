@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="mb-0">All Notes</h2>
+  <div>
+    <a class="btn btn-primary me-2" href="{{ url_for('notes_create') }}"><i class="bi bi-plus-circle"></i> Create Note</a>
+    <a class="btn btn-secondary" href="{{ url_for('tags_list') }}"><i class="bi bi-tags"></i> Manage Tags</a>
+  </div>
+</div>
+<div class="row">
+  {% for note in notes %}
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ note.title }}</h5>
+        <p class="card-text">{{ note.description }}</p>
+      </div>
+      <div class="card-footer bg-light d-flex flex-wrap justify-content-between align-items-center">
+        <div>
+          <span class="text-muted small">Tags:</span>
+          {% for t in note.tags %}
+            <a href="{{ url_for('tags_view', tag_name=t.name) }}" class="badge bg-info text-dark me-1">{{ t.name }}</a>
+          {% endfor %}
+        </div>
+        <div class="text-end">
+          <a href="{{ url_for('notes_edit', note_id=note.id) }}" class="btn btn-sm btn-outline-warning me-1" title="Edit"><i class="bi bi-pencil"></i> แก้ไข</a>
+          <form action="{{ url_for('notes_delete', note_id=note.id) }}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete" onclick="return confirm('Delete this note?');"><i class="bi bi-trash"></i> ลบ</button>
+          </form>
+        </div>
+      </div>
+      <div class="card-footer text-muted small">Last update: {{ note.updated_date }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
+

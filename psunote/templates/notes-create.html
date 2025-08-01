@@ -1,0 +1,117 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="mb-4">{{ 'Edit Note' if edit else 'Create Note' }}</h3>
+        <form action="" method="POST">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">
+            {{ form.title.label(class_='form-label') }}
+            {{ form.title(class_='form-control') }}
+          </div>
+          <div class="mb-3">
+            {{ form.description.label(class_='form-label') }}
+            {{ form.description(class_='form-control', rows=8) }}
+          </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              {{ form.tags.label(class_='form-label mb-0') }}
+              <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#addTagModal"><i class="bi bi-plus-circle"></i> เพิ่มแท็กใหม่</button>
+            </div>
+            {{ form.tags(class_='form-select', id='tags-select') }}
+            <div class="form-text">เลือกหรือพิมพ์ชื่อแท็กใหม่ แล้วกด Enter เพื่อเพิ่ม</div>
+          </div>
+
+          <!-- Modal for adding new tag -->
+          <div class="modal fade" id="addTagModal" tabindex="-1" aria-labelledby="addTagModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addTagModalLabel">เพิ่มแท็กใหม่</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <input type="text" id="new-tag-name" class="form-control" placeholder="ชื่อแท็กใหม่">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                  <button type="button" class="btn btn-primary" id="add-tag-btn">เพิ่มแท็ก</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const $select = $("#tags-select");
+              if ($select.length) {
+                $select.select2({
+                  tags: true,
+                  width: '100%',
+                  placeholder: 'เลือกหรือพิมพ์แท็ก',
+                  allowClear: true,
+                  language: {
+                    noResults: function() { return "ไม่พบแท็ก"; },
+                    inputTooShort: function() { return "พิมพ์เพื่อเพิ่มแท็กใหม่"; }
+                  }
+                });
+              }
+              // Add tag from modal
+              document.getElementById('add-tag-btn').onclick = function() {
+                const tagName = document.getElementById('new-tag-name').value.trim();
+                if (tagName) {
+                  // Add to select2 if not exists
+                  if ($select.find("option[value='"+tagName+"']").length === 0) {
+                    const newOption = new Option(tagName, tagName, true, true);
+                    $select.append(newOption).trigger('change');
+                  } else {
+                    let vals = $select.val() || [];
+                    if (!vals.includes(tagName)) {
+                      vals.push(tagName);
+                      $select.val(vals).trigger('change');
+                    }
+                  }
+                  document.getElementById('new-tag-name').value = '';
+                  // Hide modal (Bootstrap 5)
+                  const modalEl = document.getElementById('addTagModal');
+                  const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                  modal.hide();
+                }
+              };
+              // Clear input on modal close
+              document.getElementById('addTagModal').addEventListener('hidden.bs.modal', function() {
+                document.getElementById('new-tag-name').value = '';
+              });
+            });
+          </script>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const $select = $("#tags-select");
+              if ($select.length) {
+                $select.select2({
+                  tags: true,
+                  width: '100%',
+                  placeholder: 'เลือกหรือพิมพ์แท็ก',
+                  allowClear: true,
+                  language: {
+                    noResults: function() { return "ไม่พบแท็ก"; },
+                    inputTooShort: function() { return "พิมพ์เพื่อเพิ่มแท็กใหม่"; }
+                  }
+                });
+              }
+            });
+          </script>
+          <div class="d-flex justify-content-between">
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-primary">{{ 'Save' if edit else 'Create' }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
