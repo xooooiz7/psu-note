@@ -10,6 +10,9 @@
 - `*.png`, `*.jpg` : รูปภาพประกอบ (5 รูป)
 - `.gitignore` : ไฟล์สำหรับ ignore venv, ไฟล์ชั่วคราว, รูปภาพ ฯลฯ
 
+### หน้าเว็บ
+![note-function-edit-note](/images/page.jpeg)
+
 ### การสร้างโน้ตใหม่
 ![note-function-edit-note](/images/note-function-create.png)
 
